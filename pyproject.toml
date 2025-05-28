@@ -1,0 +1,18 @@
+[project]
+name = "base-flask"
+version = "0.1.0"
+description = "This is base backend using flask"
+requires-python = ">=3.12"
+authors = [
+    { name = "nghialvm", email = "lenghia1007@gmail.com" }
+]
+
+[tool.black]
+line-length = 119
+target-version = ['py312']
+
+[tool.isort]
+profile = "black"
+combine-as = true
+line-length = 119
+src-paths = ["."]

@@ -13,15 +13,15 @@ class TaskService:
             logging.error(f"Error retrieving task by ID: {str(e)}")
             raise
 
-    def create_task(self, name, description, status, due_date, priority, user_id):
+    def create_task(self, data: dict):
         try:
             return self.task_repository.create(
-                name=name,
-                description=description,
-                status=status,
-                due_date=due_date,
-                priority=priority,
-                user_id=user_id
+                name=data['name'],
+                description=data['description'],
+                start_date=data['start_date'],
+                due_date=data['due_date'],
+                priority=data['priority'],
+                user_id=data['user_id'],
             )
         except Exception as e:
             logging.error(f"Error creating task: {str(e)}")
@@ -46,4 +46,11 @@ class TaskService:
             return self.task_repository.get_list(page, per_page)
         except Exception as e:
             logging.error(f"Error retrieving task list: {str(e)}")
+            raise
+        
+    def get_tasks_by_user_id(self, user_id, page, per_page):
+        try:
+            return self.task_repository.get_list_by_user_id(user_id, page, per_page)
+        except Exception as e:
+            logging.error(f"Error retrieving tasks by user ID: {str(e)}")
             raise

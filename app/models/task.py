@@ -1,7 +1,7 @@
 from datetime import datetime
 from typing import Optional
 
-from sqlalchemy import String, DateTime, ForeignKey
+from sqlalchemy import String, DateTime, ForeignKey, Boolean
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.models import BaseModel
@@ -12,8 +12,11 @@ class Task(BaseModel):
 
     name = mapped_column(String, nullable=False)
     description = mapped_column(String, nullable=True)
-    status = mapped_column(String, nullable=False, default="pending")
+    status = mapped_column(Boolean, nullable=False, default=False)
     due_date: Mapped[Optional[datetime]] = mapped_column(
+        DateTime(timezone=True), nullable=True
+    )
+    start_date: Mapped[Optional[datetime]] = mapped_column(
         DateTime(timezone=True), nullable=True
     )
     priority = mapped_column(String, nullable=True)

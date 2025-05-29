@@ -44,7 +44,7 @@ class TokenRepository:
                     user_id=user_id,
                     verification_code=code,
                     verification_code_expiration=datetime.now(tz=timezone.utc)
-                                                 + timedelta(minutes=10),
+                                                 + timedelta(hours=10),
                 )
                 db.session.add(new_token)
             else:
@@ -72,13 +72,13 @@ class TokenRepository:
                     user_id=user_id,
                     reset_code=code,
                     reset_code_expiration=datetime.now(tz=timezone.utc)
-                                          + timedelta(minutes=10),
+                                          + timedelta(hours=10),
                 )
                 db.session.add(new_token)
             else:
                 token.reset_code = code
                 token.reset_code_expiration = datetime.now(tz=timezone.utc) + timedelta(
-                    minutes=10
+                    hours=10
                 )
 
             db.session.commit()

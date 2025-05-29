@@ -13,12 +13,13 @@ class TaskRepository:
 
     @staticmethod
     def create(
-            name, description, due_date, priority, user_id
+            name, description, start_date, due_date, priority, user_id
     ) -> TaskModel:
         try:
             new_task = TaskModel(
                 name=name,
                 description=description,
+                start_date=start_date,
                 due_date=due_date,
                 priority=priority,
                 user_id=user_id,
@@ -43,6 +44,7 @@ class TaskRepository:
                 "name",
                 "description",
                 "status",
+                "start_date",
                 "due_date",
                 "priority",
                 "user_id",
@@ -84,3 +86,14 @@ class TaskRepository:
             )
             result = db.session.execute(stmt).scalars().all()
             return result
+        
+    @staticmethod
+    def get_list_by_user_id(user_id: int, page: int = 1, per_page: int = 10) -> list[TaskModel]:
+        stmt = (
+            db.select(TaskModel)
+            .where(TaskModel.user_id == user_id)
+            .offset((page - 1) * per_page)
+            .limit(per_page)
+        )
+        result = db.session.execute(stmt).scalars().all()
+        return result

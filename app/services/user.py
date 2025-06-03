@@ -1,6 +1,7 @@
 import logging
 
 from app.repository import UserRepository
+from werkzeug.security import check_password_hash, generate_password_hash
 
 
 class UserService:
@@ -21,11 +22,24 @@ class UserService:
             logging.error(f"Error retrieving user by ID: {str(e)}")
             raise
 
-    def update_password(self, user_id, new_password):
+    def update_password(self, user_id, old_password, new_password):
         try:
             user = self.user_repository.get_by_id(user_id)
             if not user:
                 raise ValueError("User not found")
+            
+            if not old_password:
+                raise ValueError("Old password cannot be empty")
+            
+            if not check_password_hash(user.password_hash, old_password):
+                raise ValueError("Old password is incorrect")
+
+            if not new_password:
+                raise ValueError("New password cannot be empty")
+            
+            if old_password == new_password:
+                raise ValueError("New password cannot be the same as old password")
+            
             return self.user_repository.update_password(user, new_password)
         except Exception as e:
             logging.error(f"Error updating password: {str(e)}")

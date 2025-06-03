@@ -47,7 +47,6 @@ class UserItemController(Resource):
         return {"success": False, "message": "User not found"}, 404
 
     @user_api.expect(UserSchema.user_model, validate=True)
-    @JWT_required
     def put(self, id):
         data = request.get_json()
         if not data:
@@ -73,15 +72,21 @@ class UserItemController(Resource):
     @user_api.param("id", "User ID")
     class UserPasswordController(Resource):
         @user_api.expect(UserSchema.password_update_model, validate=True)
-        @JWT_required
         def put(self, id):
             data = request.get_json()
             if not data or "new_password" not in data:
-                return {"success": False, "message": "Invalid JSON data or missing 'new_password' field."}, 400
+                return {"success": False, "message": "Missing 'new_password'"}, 400
+            if "old_password" not in data:
+                return {"success": False, "message": "Missing 'old_password'"}, 400
 
+            old_password = data["old_password"]
             new_password = data["new_password"]
+
             service = UserService()
-            updated = service.update_password(id, new_password)
-            if updated:
+            try:
+                updated = service.update_password(id, old_password, new_password)
                 return {"success": True, "message": "Password updated successfully"}, 200
-            return {"success": False, "message": "Password update failed or user not found"}, 400
+            except ValueError as e:
+                return {"success": False, "message": str(e)}, 400
+            except Exception:
+                return {"success": False, "message": "Internal server error"}, 500

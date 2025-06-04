@@ -210,7 +210,7 @@ class SendVerificationCodeController(Resource):
         confirm_token = auth_service.generate_confirm_token(email)
         send_email(
             to=data["email"],
-            subject="Your Verification Code from My Restaurant",
+            subject="Your Verification Code from UETodo App",
             template="confirm",
             user=registered_user,
             code=verification_code,
@@ -257,7 +257,7 @@ class VerifyEmailController(Resource):
             }, 400
 
 
-@auth_api.route("/request-reset-password")
+@auth_api.route("/reset-password")
 class RequestResetPasswordController(Resource):
     @auth_api.expect(AuthSchema.reset_password_request_model, validate=True)
     def post(self):
@@ -294,7 +294,7 @@ class RequestResetPasswordController(Resource):
         }, 200
 
 
-@auth_api.route("/validate-reset-code")
+@auth_api.route("/verify-reset-code")
 class ValidateResetCodeController(Resource):
     @auth_api.expect(AuthSchema.reset_password_verify_model, validate=True)
     def post(self):

@@ -51,12 +51,6 @@ def create_app(config_class=Config):
     mail.init_app(app)
     celery.conf.update(app.config)
 
-    cloudinary.config(
-        cloud_name=Config.CLOUDINARY_CLOUD_NAME,
-        api_key=Config.CLOUDINARY_API_KEY,
-        api_secret=Config.CLOUDINARY_API_SECRET,
-    )
-
     from app.controllers import (
         auth_api, 
         user_api, 

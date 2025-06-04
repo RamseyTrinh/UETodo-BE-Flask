@@ -27,17 +27,8 @@ class Config:
     MAIL_USE_SSL = False
     MAIL_USERNAME = os.environ.get("MAIL_USERNAME")
     MAIL_PASSWORD = os.environ.get("MAIL_PASSWORD")
-    MAIL_DEFAULT_SENDER = "minhnguyenhai26032003@gmail.com"
-    MAIL_SUBJECT_PREFIX = "[MY RESTAURANT]"
-    AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
-    AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
-    AWS_REGION = os.environ.get("AWS_REGION")
-    AWS_S3_BUCKET_NAME = os.environ.get("AWS_S3_BUCKET_NAME")
-    ACCOUNT_NUMBER = os.environ.get("ACCOUNT_NUMBER")
-    BANK = os.environ.get("BANK")
-    CLOUDINARY_CLOUD_NAME = os.getenv("CLOUDINARY_CLOUD_NAME", "your_cloud_name")
-    CLOUDINARY_API_KEY = os.getenv("CLOUDINARY_API_KEY", "your_api_key")
-    CLOUDINARY_API_SECRET = os.getenv("CLOUDINARY_API_SECRET", "your_api_secret")
+    MAIL_DEFAULT_SENDER = "hoangkmhd190@gmail.com"
+    MAIL_SUBJECT_PREFIX = "[UETodo App]"
 
 
 secret_key = Config.SECRET_KEY

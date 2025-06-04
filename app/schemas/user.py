@@ -36,3 +36,10 @@ class UserSchema:
     create_user_model.add_argument(
         "avatar", type="FileStorage", location="files", required=False
     )
+    new_password_model = api.model(
+        "NewPassword",
+        {
+            "email": fields.String(required=True, description="User email"),
+            "new_password": fields.String(required=True, description="New password"),
+        },
+    )

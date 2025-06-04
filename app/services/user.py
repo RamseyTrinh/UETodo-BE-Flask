@@ -58,3 +58,17 @@ class UserService:
         except Exception as e:
             logging.error(f"Error deleting menu: {str(e)}")
             raise
+        
+    def new_password(self, email, new_password):
+        try:
+            user = self.user_repository.get_by_email(email)
+            if not user:
+                raise ValueError("User not found")
+            
+            if not new_password:
+                raise ValueError("New password cannot be empty")
+            
+            return self.user_repository.update_password(user, new_password)
+        except Exception as e:
+            logging.error(f"Error updating password: {str(e)}")
+            raise

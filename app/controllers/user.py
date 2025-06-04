@@ -90,3 +90,23 @@ class UserItemController(Resource):
                 return {"success": False, "message": str(e)}, 400
             except Exception:
                 return {"success": False, "message": "Internal server error"}, 500
+            
+@user_api.route("/update-new-password")
+class NewPasswordController(Resource):
+    @user_api.expect(UserSchema.new_password_model, validate=True)
+    def post(self):
+        data = request.get_json()
+        if not data:
+            return {"success": False, "message": "Invalid JSON data."}, 400
+
+        email = data.get("email")
+        new_password = data.get("new_password")
+        if not new_password or not email:
+            return {
+                "success": False,
+                "message": "New password and email are required.",
+            }, 400
+
+        service = UserService()
+        service.new_password(email, new_password)
+        return {"success": True, "message": "Password updated successfully."}, 200

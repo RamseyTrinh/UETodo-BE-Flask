@@ -80,3 +80,17 @@ class AuthSchema:
             "verification_code": fields.String(required=True, description="Reset code"),
         },
     )
+    
+    new_password_model = api.model(
+        "NewPassword",
+        {
+            "email": fields.String(required=True, description="User email"),
+            "confirm_token": fields.String(
+                required=True, description="Reset token"
+            ),
+            "new_password": fields.String(required=True, description="New password"),
+            "confirm_password": fields.String(
+                required=True, description="Confirm new password"
+            ),
+        },
+    )

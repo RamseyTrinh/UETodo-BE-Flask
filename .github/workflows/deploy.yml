@@ -18,7 +18,7 @@ jobs:
           username: ${{secrets.SERVER_USERNAME}}
           key: ${{secrets.SSH_PRIVATE_KEY}}
           script: |
-            cd ${secrets.PROJECT_DIR}
+            cd ${{secrets.PROJECT_DIR}}
             git fetch --all
             git reset --hard origin/main
             docker-compose down

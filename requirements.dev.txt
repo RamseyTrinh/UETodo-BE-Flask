@@ -1,2 +1,0 @@
-ipython==9.0.2
-pre-commit==4.2.0

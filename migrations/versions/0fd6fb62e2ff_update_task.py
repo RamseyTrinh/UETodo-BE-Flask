@@ -22,7 +22,8 @@ def upgrade():
         batch_op.alter_column('status',
                existing_type=sa.VARCHAR(),
                type_=sa.Boolean(),
-               existing_nullable=False)
+               existing_nullable=False,
+               postgresql_using="status::boolean")
 
     # ### end Alembic commands ###
 

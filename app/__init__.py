@@ -49,6 +49,12 @@ def create_app(config_class=Config):
     migrate.init_app(app, db)
     mail.init_app(app)
     celery.conf.update(app.config)
+    
+    from app.controllers import (
+        auth_api,
+        user_api,
+        task_api,
+    )
 
     authorizations = {
         "Bearer Auth": {

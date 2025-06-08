@@ -1,4 +1,3 @@
-import cloudinary
 from celery import Celery
 from flask import Blueprint, Flask
 from flask_cors import CORS
@@ -50,12 +49,6 @@ def create_app(config_class=Config):
     migrate.init_app(app, db)
     mail.init_app(app)
     celery.conf.update(app.config)
-
-    from app.controllers import (
-        auth_api, 
-        user_api, 
-        # task_api,
-    )
 
     authorizations = {
         "Bearer Auth": {

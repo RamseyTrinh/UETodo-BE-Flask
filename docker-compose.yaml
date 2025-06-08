@@ -26,7 +26,7 @@ services:
   celery:
     build:
       context: .
-    command: celery -A app.celery worker --loglevel=info
+    command: celery -A celery_worker.celery worker --loglevel=info
     container_name: celery_worker
     restart: on-failure
     depends_on:

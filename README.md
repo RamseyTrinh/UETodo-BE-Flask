@@ -2,7 +2,7 @@
 
 ### Architecture Pattern
 
-![image](https://github.com/user-attachments/assets/048afc6f-a528-4ef4-8ddf-3b8dc224d594)
+(![alt text](image.png))
 
 ### Commands
 
@@ -58,19 +58,7 @@ FLASH_APP=run.py flask db downgrade <revision>  # For Linux
 flask db downgrade <revision>  # For Windows
 ```
 
-**3. Celery**
-
-Prerequisites: RabbitMQ used for Celery broker.
-If using Docker, run command:
-
-```bash
-docker run -d --name rabbitmq \
-  -p 5672:5672 \         # Port for messaging clients (AMQP)
-  -p 15672:15672 \       # Port for RabbitMQ management web UI
-  rabbitmq:management
-```
-
-then, set environment variable (env): `CELERY_BROKER_URL=amqp://localhost` for Flask app.
+Set environment variable (env): `CELERY_BROKER_URL=amqp://localhost` for Flask app.
 For starting Celery worker, run command:
 
 ```bash
@@ -95,26 +83,12 @@ venv/Scripts/activate # For Windows
 
 ```bash
 pip install -r requirements.txt
-pip install -r requirements.dev.txt # If you are in development mode.
 ```
 
 - Install pre-commit:
 
 ```bash
 pre-commit install
-```
-
-- Run the database migrations:
-
-```bash
-FLASH_APP=run.py flask db upgrade # For Linux
-flask db upgrade # For Windows
-```
-
-- Open a second terminal window and start a Celery worker:
-
-```bash
-celery -A celery_worker.celery worker --loglevel=info
 ```
 
 - Start Flask app on your first terminal window:

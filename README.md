@@ -7,21 +7,6 @@
 ### Commands
 
 **1. Setup environment**
-
-- Create Database (using PostgreSQL ver 16)
-
-```sql
-DROP
-DATABASE IF EXISTS flask;
-
-CREATE
-DATABASE flask;
-
-CREATE ROLE flask WITH LOGIN PASSWORD 'your_password';
-ALTER
-DATABASE flask OWNER TO flask;
-```
-
 - Create environment file
 
 ``` bash

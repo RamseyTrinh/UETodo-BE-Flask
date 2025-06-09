@@ -20,11 +20,7 @@ class Task(BaseModel):
         DateTime(timezone=True), nullable=True
     )
     priority = mapped_column(String, nullable=True)
-    # project_id: Mapped[int] = mapped_column(
-    #     ForeignKey("projects.id"), nullable=False
-    # )
     user_id: Mapped[int] = mapped_column(
-        ForeignKey("users.id"), nullable=False
+        ForeignKey("users.id", ondelete='CASCADE'), nullable=False
     )
-    # project: Mapped["Project"] = relationship("Project", back_populates="tasks") # noqa: F821
     

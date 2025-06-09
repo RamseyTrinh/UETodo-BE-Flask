@@ -20,7 +20,7 @@ class User(BaseModel):
     avatar_url: Mapped[str] = mapped_column(Text, default="")
     is_verified: Mapped[bool] = mapped_column(Boolean, default=False)
 
-    token: Mapped["Token"] = relationship("Token", uselist=False, back_populates="user")  # noqa: F821
+    token: Mapped["Token"] = relationship("Token", uselist=False, back_populates="user", cascade="all, delete-orphan")
 
     def __init__(self, email, password, name, dob, gender, phone_number):
         is_verified = False

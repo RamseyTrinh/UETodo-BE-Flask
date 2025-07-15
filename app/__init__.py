@@ -31,8 +31,8 @@ def create_app(config_class=Config):
         app,
         supports_credentials=True,
         resources={
-            r"/*": {
-                "origins": "*",
+            r"/api/*": { 
+                "origins": ["http://app.uetodo.site", "http://localhost:3000"],
                 "methods": ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
                 "allow_headers": [
                     "Content-Type",
